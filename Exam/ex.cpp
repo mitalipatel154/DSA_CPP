@@ -2,7 +2,8 @@
 #include <string>
 using namespace std;
 
-struct Student {
+class Student {
+public:
     string name;
     int rollNumber;
     float attendance;
@@ -14,21 +15,17 @@ private:
     int size;
 
 public:
-    AttendanceTracker(int n) 
-    {
+    AttendanceTracker(int n) {
         size = n;
         students = new Student[size];
     }
 
-    ~AttendanceTracker() 
-    {
+    ~AttendanceTracker() {
         delete[] students;
     }
 
-    void input() 
-    {
-        for (int i = 0; i < size; i++)
-        {
+    void input() {
+        for (int i = 0; i < size; i++) {
             cout << endl << "Enter details for student " << i + 1 << ":" << endl;
             cout << "Name: ";
             cin.ignore();
@@ -40,8 +37,7 @@ public:
         }
     }
 
-    void display() 
-    {
+    void display() {
         for (int i = 0; i < size; i++) {
             cout << "Roll No: " << students[i].rollNumber
                  << ", Name: " << students[i].name
@@ -49,8 +45,7 @@ public:
         }
     }
 
-    void merge(Student arr[], int low, int mid, int high) 
-    {
+    void merge(Student arr[], int low, int mid, int high) {
         int n1 = mid - low + 1;
         int n2 = high - mid;
 
@@ -76,8 +71,7 @@ public:
         delete[] R;
     }
 
-    void mergeSort(Student arr[], int low, int high) 
-    {
+    void mergeSort(Student arr[], int low, int high) {
         if (low < high) {
             int mid = (low + high) / 2;
             mergeSort(arr, low, mid);
@@ -86,14 +80,12 @@ public:
         }
     }
 
-    void sortByRollNumber()
-    {
+    void sortByRollNumber() {
         mergeSort(students, 0, size - 1);
         cout << "Students sorted by roll number." << endl;
     }
 
-    int binarySearch(int key) 
-    {
+    int binarySearch(int key) {
         int low = 0, high = size - 1;
         while (low <= high) {
             int mid = (low + high) / 2;
@@ -107,15 +99,14 @@ public:
         return -1;
     }
 
-    void searchStudent() 
-    {
+    void searchStudent() {
         int key;
         cout << "Enter roll number to search: ";
         cin >> key;
 
         int index = binarySearch(key);
         if (index != -1) {
-            cout << endl << "Student Found: "<< endl;
+            cout << endl << "Student Found: " << endl;
             cout << "Roll No: " << students[index].rollNumber
                  << ", Name: " << students[index].name
                  << ", Attendance: " << students[index].attendance << "%" << endl;
@@ -125,9 +116,7 @@ public:
     }
 };
 
-
-int main() 
-{
+int main() {
     int n;
     cout << "Enter number of students: ";
     cin >> n;
@@ -153,7 +142,7 @@ int main()
             tracker.display();
             break;
         case 3:
-            tracker.sortByRollNumber(); 
+            tracker.sortByRollNumber();
             tracker.searchStudent();
             break;
         case 0:
